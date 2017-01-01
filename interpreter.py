@@ -303,7 +303,7 @@ class Interpreter():
           function.resetEnvironment()
         elif name in self.environment.blocks.keys():
           block=self.environment.getBlock(name)
-          out=self.runCode(args,block)
+          out=self.runCode(args,block,iterVals)
           if out!=None:
             if out!=1:
               return out-1
@@ -318,7 +318,7 @@ class Interpreter():
         self.environment.addBlock(values[0],Interpreter(values[1]))
       elif token.tokenType==WHILELOOP:
         while self.environment.getValue()!=0:
-          self.runcode(None,values[0])
+          self.runCode(None,values[0])
       elif token.tokenType==INPLOOP:
         for iterVal in inp:
           self.runCode(inp,values[0],iterVals+[iterVal])
@@ -373,3 +373,5 @@ interpreter.runCode()
 output=interpreter.environment.output
 print(', '.join([str(out) for out in output]))
 print(''.join([chr(out) for out in output]))
+#while True:
+#  pass
